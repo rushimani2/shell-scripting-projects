@@ -6,16 +6,17 @@ API_URL="https://api.github.com"
 # GitHub username and personal access token
 USERNAME=$username
 TOKEN=$token
-function helper {
-    expected_cmd_args=2
-    if [$# -ne $expected_cmd_args] ; then
-    echo "please execute the script with required cmd args"
-    }
 
 # User and Repository information
 REPO_OWNER=$1
 REPO_NAME=$2
-
+TOKEN=$token
+function helper {
+        expected_cmd_args=2
+        if [ $# -ne ${expected_cmd_args} ] ; then
+            echo "please execute the script with required cmd args"
+        fi
+}
 # Function to make a GET request to the GitHub API
 function github_api_get {
     local endpoint="$1"
@@ -44,4 +45,5 @@ function list_users_with_read_access {
 # Main script
 
 echo "Listing users with read access to ${REPO_OWNER}/${REPO_NAME}..."
+helper
 list_users_with_read_access
